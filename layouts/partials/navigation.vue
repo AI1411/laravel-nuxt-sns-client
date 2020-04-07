@@ -5,7 +5,8 @@
         class="navbar-brand text-uppercase fw-500"
         :to="{ name: 'index'}"
         title="Project Name"
-      >Laravel-Nuxt-SNS</nuxt-link
+      >Laravel-Nuxt-SNS
+      </nuxt-link
       >
       <button
         class="navbar-toggler mr-auto"
@@ -55,76 +56,80 @@
       </div>
 
       <!-- Before Login -->
-      <ul class="before-login font-14 fw-300 text-uppercase">
-        <li>
-          <nuxt-link :to="{ name: 'register' }">新規登録</nuxt-link>
-        </li>
-        <li>
-          <nuxt-link :to="{ name: 'login'}">ログイン</nuxt-link>
-        </li>
-      </ul>
+      <template v-if="!$auth.loggedIn">
+        <ul class="before-login font-14 fw-300 text-uppercase">
+          <li>
+            <nuxt-link :to="{ name: 'register' }">新規登録</nuxt-link>
+          </li>
+          <li>
+            <nuxt-link :to="{ name: 'login'}">ログイン</nuxt-link>
+          </li>
+        </ul>
+      </template>
       <!-- End Before Login -->
 
       <!-- After Login -->
-      <ul class="author-page white-path">
-        <!-- Profile Dropdown -->
-        <li class="dropdown">
-          <a
-            href="#"
-            class="dropdown-toggle text-white"
-            id="userDropdown"
-            role="button"
-            data-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            <img
-              class="user-thumb"
-              src="assets/images/profile.png"
-              alt="Neba Funwi-Gabga"
-            />
-            <div class="usr-info">
+      <template v-else>
+        <ul class="author-page white-path">
+          <!-- Profile Dropdown -->
+          <li class="dropdown">
+            <a
+              href="#"
+              class="dropdown-toggle text-white"
+              id="userDropdown"
+              role="button"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <img
+                class="user-thumb"
+                src="assets/images/profile.png"
+                alt="Neba Funwi-Gabga"
+              />
+              <div class="usr-info">
                                 <span class="user-name font-14 fw-500"
                                 >Akira Ishii</span
                                 >
-              <span class="user-deg font-10 fw-300"
-              >エンジニア</span
-              >
-              <span class="down-chevron">
+                <span class="user-deg font-10 fw-300"
+                >エンジニア</span
+                >
+                <span class="down-chevron">
                                     <i class="fa fa-angle-down"></i>
                                 </span>
-            </div>
-          </a>
-          <div
-            class="dropdown-menu user-dropdown font-14 fw-500"
-            aria-labelledby="userDropdown"
-          >
-            <div class="dropdown-title-group font-12 fw-500">
+              </div>
+            </a>
+            <div
+              class="dropdown-menu user-dropdown font-14 fw-500"
+              aria-labelledby="userDropdown"
+            >
+              <div class="dropdown-title-group font-12 fw-500">
                                 <span class="dropdown-title text-uppercase"
                                 >マイアカウント</span
                                 >
+              </div>
+              <a
+                class="dropdown-item mt-28"
+                href="#"
+                title="Profile"
+              >
+                <i class="fa fa-user"></i>
+                プロフィール
+              </a>
+              <a class="dropdown-item" href="#" title="Setting">
+                <i class="fa fa-cogs"></i>
+                設定
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#" title="Sign Out">
+                <i class="fa fa-lock"></i>
+                サインアウト
+              </a>
             </div>
-            <a
-              class="dropdown-item mt-28"
-              href="#"
-              title="Profile"
-            >
-              <i class="fa fa-user"></i>
-              プロフィール
-            </a>
-            <a class="dropdown-item" href="#" title="Setting">
-              <i class="fa fa-cogs"></i>
-              設定
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" title="Sign Out">
-              <i class="fa fa-lock"></i>
-              サインアウト
-            </a>
-          </div>
-        </li>
-        <!-- End Profile Dropdown -->
-      </ul>
+          </li>
+          <!-- End Profile Dropdown -->
+        </ul>
+      </template>
       <!-- End After Login -->
     </nav>
   </header>
