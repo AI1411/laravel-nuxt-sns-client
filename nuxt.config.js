@@ -41,6 +41,7 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~plugins/vform'
   ],
   /*
   ** Nuxt.js dev-modules
