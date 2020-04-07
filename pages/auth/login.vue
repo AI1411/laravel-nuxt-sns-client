@@ -7,7 +7,7 @@
         <h1 class="text-uppercase fw-500 mb-4 text-center font-22">
           ログイン
         </h1>
-        <form class="auth-form" action="" method="">
+        <form class="auth-form">
           <div class="form-group">
             <input
               type="text"
@@ -34,7 +34,7 @@
           </div>
           <p class="font-14 fw-400 text-center mt-4">
             アカウントを持っていない方は
-            <a class="color-blue" href="#">こちら</a>
+            <nuxt-link :to="{ name: 'register' }" class="color-blue">こちら</nuxt-link>
           </p>
         </form>
       </div>
