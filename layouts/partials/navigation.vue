@@ -1,11 +1,11 @@
 <template>
   <header class="fixed-topx">
     <nav class="navbar navbar-expand-lg navbar-dark align-items-center">
-      <a
+      <nuxt-link
         class="navbar-brand text-uppercase fw-500"
-        href="#"
+        :to="{ name: 'index'}"
         title="Project Name"
-      >Laravel-Nuxt-SNS</a
+      >Laravel-Nuxt-SNS</nuxt-link
       >
       <button
         class="navbar-toggler mr-auto"
@@ -57,10 +57,10 @@
       <!-- Before Login -->
       <ul class="before-login font-14 fw-300 text-uppercase">
         <li>
-          <a href="#">新規登録</a>
+          <nuxt-link :to="{ name: 'register' }">新規登録</nuxt-link>
         </li>
         <li>
-          <a href="#">ログイン</a>
+          <nuxt-link :to="{ name: 'login'}">ログイン</nuxt-link>
         </li>
       </ul>
       <!-- End Before Login -->
