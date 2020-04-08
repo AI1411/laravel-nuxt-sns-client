@@ -25,21 +25,22 @@
   export default {
     data() {
       return {
-        data: '',
-        status: ''
+        success: true
       }
     },
+    middleware: ['guest'],
     async asyncData({ params, query, app }) {
       const q = await Object.keys(query)
         .map(k => `${k}=${query[k]}`)
         .join('&');
       try {
-        const { data } = await app.$axios.post(
+        const {data}  = await app.$axios.post(
           `/verification/verify/${params.id}?${q}`
         );
         return { success: true, status: data.message };
       } catch (e) {
-        return { success: false, status: e.response.data.errors.message };
+        console.log(e)
+        return { success: false, status: e.message };
       }
     }
   };

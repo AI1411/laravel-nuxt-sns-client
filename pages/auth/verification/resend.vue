@@ -18,6 +18,7 @@
             <base-input
               :form="form"
               field="email"
+              inputType="email"
               v-model="form.email"
               placeholder="メールアドレス"
             />
@@ -37,6 +38,7 @@
 
 <script>
     export default {
+      middleware: ['guest'],
         data() {
           return {
             form: this.$vform({

@@ -28,9 +28,13 @@
         type: String,
         default: ''
       },
-      placeholder: {
+      inputType: {
         type: String,
         default: 'text'
+      },
+      placeholder: {
+        type: String,
+        default: ''
       },
       readonly: {
         type: Boolean,

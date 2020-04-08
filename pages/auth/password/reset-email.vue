@@ -8,7 +8,7 @@
         <alert-success :form="form">{{ status }}</alert-success>
         <div class="form-group">
           <base-input
-            type="email"
+            inputType="email"
             :form="form"
             field="email"
             v-model="form.email"
@@ -31,6 +31,7 @@
 
 <script>
   export default {
+    middleware: ['guest'],
     data() {
       return {
         form: this.$vform({

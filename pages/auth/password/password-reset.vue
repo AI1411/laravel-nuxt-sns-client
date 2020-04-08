@@ -15,6 +15,7 @@
           <base-input
             :form="form"
             :readonly="true"
+            inputType="email"
             field="email"
             v-model="form.email"
             placeholder="Email"
@@ -50,6 +51,7 @@
 
 <script>
   export default {
+    middleware: ['guest'],
     data() {
       return {
         status: '',

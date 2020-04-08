@@ -49,9 +49,9 @@
         <div
           class="upload-shot white-path font-14 fw-500 text-uppercase mr-auto"
         >
-          <a href="#" class="primary-bg-color text-white">
-            <i class="fas fa-cloud-upload-alt"></i> Upload
-          </a>
+          <nuxt-link :to="{name: 'designs.upload'}" href="#" class="primary-bg-color text-white">
+            <i class="fas fa-cloud-upload-alt"></i>アップロード
+          </nuxt-link>
         </div>
       </div>
 
@@ -108,11 +108,11 @@
                                 >マイアカウント</span
                                 >
               </div>
-              <a
-                class="dropdown-item mt-28"
-                href="#"
-                title="Profile"
-              >
+              <nuxt-link to="/settings/dashboard" class="dropdown-item mt-28">
+                <i class="fas fa-tachometer-alt"></i>
+                Dashboard
+              </nuxt-link>
+              <a class="dropdown-item" href="#" title="Profile">
                 <i class="fa fa-user"></i>
                 プロフィール
               </a>
@@ -121,7 +121,7 @@
                 設定
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" @cilck.prevent="logout">
+              <a class="dropdown-item" href="#" @click.prevent="logout">
                 <i class="fa fa-lock"></i>
                 サインアウト
               </a>

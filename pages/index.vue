@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    {{ $auth.user }}
+    {{ $auth.user.name }}
   </div>
 </template>
 
