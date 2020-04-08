@@ -121,7 +121,7 @@
                 設定
               </a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#" title="Sign Out">
+              <a class="dropdown-item" @cilck.prevent="logout">
                 <i class="fa fa-lock"></i>
                 サインアウト
               </a>
@@ -137,7 +137,11 @@
 
 <script>
   export default {
-    name: "navigation"
+    methods: {
+      logout() {
+        this.$auth.logout();
+      }
+    }
   }
 </script>
 

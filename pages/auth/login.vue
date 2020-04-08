@@ -37,7 +37,7 @@
             <has-error :form="form" field="password"></has-error>
           </div>
           <div class="mt-4 mb-4 clearfix">
-            <a class="forgot-pass color-blue font-14 fw-400">パスワードを忘れた方はこちら</a>
+            <nuxt-link :to="{name: 'password.email'}" class="forgot-pass color-blue font-14 fw-400">パスワードを忘れた方はこちら</nuxt-link>
           </div>
           <div class="text-right">
             <button
