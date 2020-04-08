@@ -12,43 +12,36 @@
           </p>
         </alert-success>
         <div class="form-group">
-          <input
+          <base-input
             :form="form"
-            name="form.email"
+            :readonly="true"
+            field="email"
             v-model="form.email"
-            class="form-control form-control-lg font-14 fw-300"
-            :class="{'is-invalid': form.errors.has('email')}"
             placeholder="Email"
           />
-          <has-error :form="form" field="email"></has-error>
         </div>
         <div class="form-group">
-          <input
-            type="password"
-            name="form.password"
+          <base-input
+            :form="form"
+            inputType="password"
+            field="password"
             v-model="form.password"
-            class="form-control form-control-lg font-14 fw-300"
-            :class="{'is-invalid': form.errors.has('password')}"
-            placeholder="New Password"
+            placeholder="新しいパスワード"
           />
-          <has-error :form="form" field="password"></has-error>
         </div>
         <div class="form-group">
-          <input
-            type="password"
-            name="form.password_confirmation"
+          <base-input
+            :form="form"
+            field="password_confirmation"
             v-model="form.password_confirmation"
-            class="form-control form-control-lg font-14 fw-300"
-            placeholder="New Password"
+            inputType="password"
+            placeholder="パスワード確認"
           />
         </div>
         <div class="text-right">
-            <button type="submit" :disabled="form.busy" class="btn btn-primary primary-bg-color font-16 fw-500 text-uppercase">
-              <span v-if="form.busy">
-                <i class="fas fa-spunner fa-spin"></i>
-              </span>
-              パスワードリセット
-            </button>
+          <base-button :loading="form.busy">
+            パスワードリセット
+          </base-button>
         </div>
       </form>
     </div>

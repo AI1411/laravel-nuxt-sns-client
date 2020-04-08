@@ -16,26 +16,22 @@
             >
           </alert-error>
           <div class="form-group">
-            <input
-              type="text"
-              name="email"
+            <base-input
+              :form="form"
+              field="email"
+              inputType="email"
               v-model="form.email"
-              class="form-control form-control-lg font-14 fw-300"
-              :class="{'is-invalid': form.errors.has('email')}"
               placeholder="メールアドレス"
             />
-            <has-error :form="form" field="email"></has-error>
           </div>
           <div class="form-group">
-            <input
-              type="password"
-              name="password"
+            <base-input
+              :form="form"
+              field="password"
+              inputType="password"
               v-model="form.password"
-              class="form-control form-control-lg font-14 fw-300"
-              :class="{'is-invalid' : form.errors.has('password')}"
               placeholder="パスワード"
             />
-            <has-error :form="form" field="password"></has-error>
           </div>
           <div class="mt-4 mb-4 clearfix">
             <nuxt-link :to="{name: 'password.email'}" class="forgot-pass color-blue font-14 fw-400">パスワードを忘れた方はこちら

@@ -9,74 +9,57 @@
         </h1>
         <form class="auth-form" @submit.prevent="submit">
           <alert-success :form="form">
-              確認メールを送信しました
+            確認メールを送信しました
           </alert-success>
           <div class="form-group">
-            <input
-              type="text"
-              name="name"
+            <base-input
+              :form="form"
+              field="name"
               v-model.trim="form.name"
-              class="form-control form-control-lg font-14 fw-300"
-              :class="{ 'is-invalid': form.errors.has('name') }"
               placeholder="名前"
             />
-            <has-error :form="form" field="name"></has-error>
           </div>
           <div class="form-group">
-            <input
-              type="text"
-              name="username"
+            <base-input
+              :form="form"
+              inputType="text"
+              field="username"
               v-model.trim="form.username"
-              class="form-control form-control-lg font-14 fw-300"
-              :class="{ 'is-invalid': form.errors.has('username') }"
               placeholder="アカウント名"
             />
-            <has-error :form="form" field="username"></has-error>
           </div>
           <div class="form-group">
-            <input
-              type="text"
-              name="email"
+            <base-input
+              :form="form"
+              inputType="email"
+              field="email"
               v-model.trim="form.email"
-              class="form-control form-control-lg font-14 fw-300"
-              :class="{ 'is-invalid': form.errors.has('email') }"
               placeholder="メールアドレス"
             />
-            <has-error :form="form" field="email"></has-error>
           </div>
           <div class="form-group">
-            <input
-              type="password"
-              name="password"
+            <base-input
+              :form="form"
+              inputType="password"
+              field="password"
               v-model.trim="form.password"
-              class="form-control form-control-lg font-14 fw-300"
-              :class="{ 'is-invalid': form.errors.has('password') }"
               placeholder="パスワード"
             />
-            <has-error :form="form" field="password"></has-error>
           </div>
           <div class="form-group">
-            <input
-              type="password"
+            <base-input
+              :form="form"
+              inputType="password"
+              field="password_confirmation"
               name="password_confirmation"
               v-model.trim="form.password_confirmation"
-              class="form-control form-control-lg font-14 fw-300"
-              :class="{ 'is-invalid': form.errors.has('password_confirmation') }"
               placeholder="パスワード確認"
             />
-            <has-error :form="form" field="password_confirmation"></has-error>
           </div>
           <div class="text-right">
-            <button
-              type="submit"
-              :disabled="form.busy"
-              class="btn btn-primary primary-bg-color font-16 fw-500 text-uppercase"
-            >
-              <span v-if="form.busy">
-                <i class="fas fa-spinner fa-spin"></i>
-              </span>
+            <base-button :loading="form.busy">
               登録
-            </button>
+            </base-button>
           </div>
           <p class="font-14 fw-400 text-center mt-4">
             アカウントを持っている方はこちら
