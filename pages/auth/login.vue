@@ -11,7 +11,8 @@
           <alert-error v-if="form.errors.has('message')" :form="form">
             {{ form.errors.get('message') }}
             <nuxt-link :to="{ name: 'verification.resend' }"
-            >Resend verification email</nuxt-link
+            >Resend verification email
+            </nuxt-link
             >
           </alert-error>
           <div class="form-group">
@@ -37,19 +38,13 @@
             <has-error :form="form" field="password"></has-error>
           </div>
           <div class="mt-4 mb-4 clearfix">
-            <nuxt-link :to="{name: 'password.email'}" class="forgot-pass color-blue font-14 fw-400">パスワードを忘れた方はこちら</nuxt-link>
+            <nuxt-link :to="{name: 'password.email'}" class="forgot-pass color-blue font-14 fw-400">パスワードを忘れた方はこちら
+            </nuxt-link>
           </div>
           <div class="text-right">
-            <button
-              type="submit"
-              :disabled="form.busy"
-              class="btn btn-primary primary-bg-color font-16 fw-500 text-uppercase"
-            >
-              <span v-if="form.busy">
-                <i class="fas fa-spinner fa-spin"></i>
-              </span>
+            <base-button :loading="form.busy">
               ログイン
-            </button>
+            </base-button>
           </div>
           <p class="font-14 fw-400 text-center mt-4">
             アカウントを持っていない方は
