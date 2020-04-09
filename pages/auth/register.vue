@@ -95,11 +95,12 @@
           }).catch(error => {
           console.log(error)
         })
-      }
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
+};
 </script>
 
-<style scoped>
-
-</style>
+<style></style>

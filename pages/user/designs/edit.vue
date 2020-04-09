@@ -15,9 +15,8 @@
       <div class="row">
         <div class="col-md-6">
           <div class="card">
-            <div class="card-body p-1">
-              <img src="https://www.gravatar.com/avatar/9c308f28b37069ae60363d256d2ab724jpg?s=200&d=mm" alt="">
-<!--              <img :src="design.images.large" class="w-100 mb-4"/>-->
+            <div class="card-body p-1" v-if="design.images">
+              <img :src="design.images.large" class="w-100 mb-4" />
             </div>
           </div>
         </div>
@@ -34,7 +33,7 @@
                     field="title"
                     v-model="form.title"
                     placeholder="Enter a title"
-                  />
+                  ></base-input>
                 </div>
                 <div class="form-group">
                   <base-textarea
@@ -42,7 +41,7 @@
                     field="description"
                     v-model="form.description"
                     placeholder="Enter a description"
-                  />
+                  ></base-textarea>
                 </div>
                 <div class="form-group">
                   <client-only>
@@ -50,10 +49,10 @@
                       :tags="form.tags"
                       placeholder="Tags separated by commas"
                       on-paste-delimiter=","
-                    />
+                    ></better-input-tag>
                   </client-only>
                 </div>
-                <template>
+                <template v-if="teams.length">
                   <div class="form-group custom-control custom-checkbox">
                     <input
                       type="checkbox"
@@ -103,7 +102,11 @@
                     Publish this design
                   </label>
                 </div>
+
                 <div class="text-right">
+                  <nuxt-link :to="{name: 'settings.designs'}">
+                    戻る
+                  </nuxt-link>
                   <base-button :loading="form.busy">
                     Update Design
                   </base-button>
@@ -119,72 +122,73 @@
 </template>
 
 <script>
-  import BetterInputTag from 'better-vue-input-tag';
+import BetterInputTag from 'better-vue-input-tag';
+export default {
+  middleware: ['auth'],
+  components: {
+    BetterInputTag
+  },
+  data() {
+    return {
+      form: this.$vform({
+        title: '',
+        description: '',
+        is_live: false,
+        tags: [],
+        assign_to_team: false,
+        team: null
+      })
+    };
+  },
 
-  export default {
-    // middleware: ['auth'],
-    components: {
-      BetterInputTag
-    },
-    data() {
-      return {
-        form: this.$vform({
-          title: '',
-          description: '',
-          is_live: false,
-          tags: [],
-          assign_to_team: false,
-          team: null
-        })
-      };
-    },
-    async asyncData({$axios, params, error, redirect}) {
-      try {
-        const design = await $axios.$get(`/designs/${params.id}/byUser`);
-        const teams = await $axios.$get(`/users/teams`);
-        return {design: design.data, teams: teams.data};
-      } catch (err) {
-        if (err.response === 404) {
-          error({statusCode: 404, message: 'Design not found'});
-        } else if (err.response === 401) {
-          redirect('/login');
-          // } else {
-          //   error({statusCode: 500, message: 'Internal server error'});
-          // }
-        }
-      }
-    },
-    methods: {
-      submit() {
-        this.form
-          .put(`/designs/${this.$route.params.id}`)
-          .then(res => {
-            setTimeout(() => {
-              this.$router.push({name: 'settings.dashboard'});
-            }, 1000);
-          })
-          .catch(err => console.log(err.response));
-      }
-    },
-    mounted() {
-      if (this.design) {
-        Object.keys(this.form).forEach(key => {
-          if (this.design.hasOwnProperty(key)) {
-            this.form[key] = this.design[key];
-          }
-        });
-        this.form.tags = this.design.tag_list.tags || [];
-        if (this.design.team) {
-          this.form.team = this.design.team.id;
-          this.form.assign_to_team = true;
-        } else {
-          this.form.assign_to_team = false;
-        }
+  async asyncData({ $axios, params, error, redirect }) {
+    try {
+      const design = await $axios.$get(`/designs/${params.id}/byUser`);
+      const teams = await $axios.$get(`/users/teams`);
+
+      return { design: design.data, teams: teams.data };
+    } catch (err) {
+      if (err.response.status === 404) {
+        error({ statusCode: 404, message: 'Design not found' });
+      } else if (err.response.status === 401) {
+        redirect('/login');
+      } else {
+        error({ statusCode: 500, message: 'Internal server error' });
       }
     }
-  };
+  },
+
+  methods: {
+    submit() {
+      this.form
+        .put(`/designs/${this.$route.params.id}`)
+        .then(res => {
+          setTimeout(() => {
+            this.$router.push({ name: 'settings.dashboard' });
+          }, 1000);
+        })
+        .catch(err => console.log(err.response));
+    }
+  },
+
+  mounted() {
+    if (this.design) {
+      Object.keys(this.form).forEach(key => {
+        if (this.design.hasOwnProperty(key)) {
+          this.form[key] = this.design[key];
+        }
+      });
+      this.form.tags = this.design.tag_list.tags || [];
+
+      if (this.design.team) {
+        this.form.team = this.design.team.id;
+        this.form.assign_to_team = true;
+      } else {
+        this.form.assign_to_team = false;
+      }
+    }
+  }
+};
 </script>
 
-<style scoped>
-
-</style>
+<style></style>

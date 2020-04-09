@@ -6,7 +6,7 @@
       :value="value"
       :readonly="readonly"
       :placeholder="placeholder"
-      :class="{'is-invalid': form.errors.has(field)}"
+      :class="{ 'is-invalid': form.errors.has(field) }"
       @input="handleInput"
     />
     <has-error :form="form" :field="field"></has-error>
@@ -14,38 +14,44 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      form: {
-        type: Object,
-        required: true
-      },
-      field: {
-        type: String,
-        required: true
-      },
-      value: {
-        type: String,
-        default: ''
-      },
-      inputType: {
-        type: String,
-        default: 'text'
-      },
-      placeholder: {
-        type: String,
-        default: ''
-      },
-      readonly: {
-        type: Boolean,
-        default: false
-      }
+export default {
+  props: {
+    form: {
+      type: Object,
+      required: true
     },
-    methods: {
-      handleInput(e) {
-        this.$emit('input', e.target.value);
-      }
+    field: {
+      type: String,
+      required: true
+    },
+    value: {
+      type: String,
+      default: ''
+    },
+    placeholder: {
+      type: String,
+      default: ''
+    },
+    inputType: {
+      type: String,
+      default: 'text'
+    },
+    readonly: {
+      type: Boolean,
+      default: false
     }
+  },
+
+  methods: {
+    handleInput(e) {
+      this.$emit('input', e.target.value);
+    }
+  },
+
+  mounted() {
+    //console.log(this.$attrs);
   }
+};
 </script>
 
+<style></style>

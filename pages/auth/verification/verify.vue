@@ -22,28 +22,23 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        success: true
-      }
-    },
-    middleware: ['guest'],
-    async asyncData({ params, query, app }) {
-      const q = await Object.keys(query)
-        .map(k => `${k}=${query[k]}`)
-        .join('&');
-      try {
-        const {data}  = await app.$axios.post(
-          `/verification/verify/${params.id}?${q}`
-        );
-        return { success: true, status: data.message };
-      } catch (e) {
-        console.log(e)
-        return { success: false, status: e.message };
-      }
+export default {
+  middleware: ['guest'],
+  async asyncData({ params, query, app }) {
+    const q = await Object.keys(query)
+      .map(k => `${k}=${query[k]}`)
+      .join('&');
+
+    try {
+      const { data } = await app.$axios.post(
+        `/verification/verify/${params.id}?${q}`
+      );
+      return { success: true, status: data.message };
+    } catch (e) {
+      return { success: false, status: e.response.data.errors.message };
     }
-  };
+  }
+};
 </script>
 
 <style></style>

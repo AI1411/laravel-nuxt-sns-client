@@ -1,7 +1,7 @@
 <template>
   <button
     :disabled="loading"
-    :tyoe="nativeType"
+    :type="nativeType"
     class="btn"
     :class="{
       [`btn-${type}`]: true,
@@ -17,32 +17,32 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      type: {
-        type: String,
-        default: 'primary'
-      },
-      nativeType: {
-        type: String,
-        default: '送信'
-      },
-      loading: {
-        type: Boolean,
-        default: false
-      },
-      block: {
-        type: Boolean,
-        default: false
-      },
-      size: {
-        type: String,
-        default: 'md'
-      }
+export default {
+  name: 'base-button',
+
+  props: {
+    type: {
+      type: String,
+      default: 'primary'
+    },
+    nativeType: {
+      type: String,
+      default: 'submit'
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    },
+    block: {
+      type: Boolean,
+      default: false
+    },
+    size: {
+      type: String,
+      default: 'md'
     }
   }
+};
 </script>
 
-<style scoped>
-
-</style>
+<style></style>

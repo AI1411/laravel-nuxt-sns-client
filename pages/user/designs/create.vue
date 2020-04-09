@@ -1,6 +1,5 @@
 <template>
-  <div class="wrapper">
-    <!-- Start Hero -->
+  <div>
     <section class="hero text-center bg-secondary text-white">
       <div class="container">
         <h1 class="font-28 fw-600 text-uppercase">
@@ -8,19 +7,15 @@
         </h1>
       </div>
     </section>
-    <!-- End Hero -->
 
-    <!-- Upload Shot -->
     <div class="upload-shot">
       <div class="container">
-        <div
-          class="row justify-content-center align-items-center text-center"
-        >
+        <div class="row justify-content-center align-items-center text-center">
           <div class="col-md-6">
             <div class="card bg-white shadow-sm">
-              <div class="d-flex justify-content-center flex-column p-1">
+              <div class="d-flex flex-column justify-content-center p-1">
                 <div class="alert alert-danger" v-if="error">
-                  <p>エラー</p>
+                  <p>An error occurred during the upload process</p>
                   <p>{{ error }}</p>
                 </div>
                 <slim-cropper :options="slimOptions">
@@ -42,40 +37,40 @@
         </div>
       </div>
     </div>
-    <!-- End Upload Shot -->
   </div>
 </template>
 
 <script>
-  import Slim from '@/components/slims/slim.vue';
-  export default {
-    // middleware: ['auth'],
-    components: {
-      'slim-cropper': Slim
-    },
-    data() {
-      return {
-        slimOptions: {
-          service: this.slimService,
-          post: 'output',
-          defaultInputName: 'image',
-          minSize: '400,300',
-          label: '画像を選択してください',
-          maxFileSize: 2 // 2MB
-        },
-        uploading: false,
-        error: ''
-      }
-    },
-    methods: {
-      slimService(formData, progress, success, failure, slim) {
-        this.uploading = true;
-        this.$axios
-        .post('/designs', formData)
+import Slim from '@/components/slim/slim.vue';
+export default {
+  middleware: ['auth'],
+  components: {
+    'slim-cropper': Slim
+  },
+  data() {
+    return {
+      slimOptions: {
+        service: this.slimService,
+        post: 'output',
+        defaultInputName: 'image',
+        minSize: '400,300',
+        label: 'Select Image...',
+        maxFileSize: 2 // value is 2MB
+      },
+      uploading: false,
+      error: ''
+    };
+  },
+
+  methods: {
+    slimService(formdata, progress, success, failure, slim) {
+      this.uploading = true;
+      this.$axios
+        .post('/designs', formdata)
         .then(res => {
           this.$router.push({
             name: 'designs.edit',
-            params: {id: res.data.id}
+            params: { id: res.data.id }
           });
         })
         .catch(err => {
@@ -83,12 +78,10 @@
           this.error = message[Object.keys(message)[0]][0];
           failure(500);
         })
-        .finally(() => (this.uploading = false))
-      }
+        .finally(() => (this.uploading = false));
     }
   }
+};
 </script>
 
-<style scoped>
-
-</style>
+<style></style>

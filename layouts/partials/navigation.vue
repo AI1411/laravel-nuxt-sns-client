@@ -82,21 +82,13 @@
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <img
-                class="user-thumb"
-                src="assets/images/profile.png"
-                alt="Neba Funwi-Gabga"
-              />
+              <img class="user-thumb" src="~assets/images/profile.png" />
               <div class="usr-info">
-                                <span class="user-name font-14 fw-500"
-                                >Akira Ishii</span
-                                >
-                <span class="user-deg font-10 fw-300"
-                >エンジニア</span
-                >
+                <span class="user-name font-14 fw-500">John Doe</span>
+                <span class="user-deg font-10 fw-300">Sr. UI Designer</span>
                 <span class="down-chevron">
-                                    <i class="fa fa-angle-down"></i>
-                                </span>
+                  <i class="fa fa-angle-down"></i>
+                </span>
               </div>
             </a>
             <div
@@ -136,15 +128,13 @@
 </template>
 
 <script>
-  export default {
-    methods: {
-      logout() {
-        this.$auth.logout();
-      }
+export default {
+  methods: {
+    logout() {
+      this.$auth.logout();
     }
   }
+};
 </script>
 
-<style scoped>
-
-</style>
+<style></style>
