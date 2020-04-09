@@ -60,8 +60,8 @@
           post: 'output',
           defaultInputName: 'image',
           minSize: '400,300',
-          label: 'Select Image...',
-          maxFileSize: 2
+          label: '画像を選択してください',
+          maxFileSize: 2 // 2MB
         },
         uploading: false,
         error: ''
