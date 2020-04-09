@@ -43,7 +43,7 @@
 <script>
 import Slim from '@/components/slim/slim.vue';
 export default {
-  middleware: ['auth'],
+  // middleware: ['auth'],
   components: {
     'slim-cropper': Slim
   },
@@ -53,7 +53,7 @@ export default {
         service: this.slimService,
         post: 'output',
         defaultInputName: 'image',
-        minSize: '800,600',
+        minSize: '100,100',
         label: 'Select Image...',
         maxFileSize: 2 // value is 2MB
       },

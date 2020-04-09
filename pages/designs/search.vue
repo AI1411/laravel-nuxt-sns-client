@@ -4,9 +4,7 @@
     <section class="filters-block shadow-sm">
       <div class="container">
         <form @submit.prevent="search">
-          <div
-            class="filters d-flex justify-content-between align-items-center"
-          >
+          <div class="filters d-flex justify-content-between align-items-center">
             <ul class="filters-dropdown">
               <li class="dropdown">
                 <select
@@ -31,9 +29,7 @@
                   false-value="0"
                   v-model="filters.has_comments"
                 />
-                <label class="custom-control-label" for="hasComments"
-                  >Has Comments</label
-                >
+                <label class="custom-control-label" for="hasComments">Has Comments</label>
               </div>
 
               <div class="custom-control custom-checkbox mr-3">
@@ -45,11 +41,8 @@
                   false-value="0"
                   v-model="filters.has_team"
                 />
-                <label class="custom-control-label" for="hasTeam"
-                  >By Team</label
-                >
+                <label class="custom-control-label" for="hasTeam">By Team</label>
               </div>
-
               <div>
                 <div class="input-group mb-0">
                   <input
@@ -64,7 +57,7 @@
                       class="btn rounded primary-bg-color text-white"
                       type="submit"
                     >
-                      <span v-if="searching">
+                      <span v-show="searching">
                         <i class="fas fa-spinner fa-spin"></i>
                       </span>
                       Search
@@ -82,11 +75,7 @@
     <section class="cards-block">
       <div class="container">
         <div class="row">
-          <base-design
-            v-for="design in designs"
-            :key="design.id"
-            :design="design"
-          ></base-design>
+          <base-design v-for="design in designs" :key="design.id" :design="design"></base-design>
         </div>
       </div>
     </section>
