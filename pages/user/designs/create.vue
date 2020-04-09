@@ -53,7 +53,7 @@ export default {
         service: this.slimService,
         post: 'output',
         defaultInputName: 'image',
-        minSize: '400,300',
+        minSize: '800,600',
         label: 'Select Image...',
         maxFileSize: 2 // value is 2MB
       },

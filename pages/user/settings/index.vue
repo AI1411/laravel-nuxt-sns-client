@@ -28,18 +28,18 @@
 </template>
 
 <script>
-  export default {
-    middleware: ['auth'],
-    data() {
-      return {
-        links: [
-          {title: 'ダッシュボード', route: 'settings.dashboard'},
-          {title: 'プロフィール編集', route: 'settings.profile'},
-          {title: 'デザイン', route: 'settings.designs'}
-        ]
-      };
-    }
-  };
+export default {
+  middleware: ['auth'],
+  data() {
+    return {
+      links: [
+        { title: 'Dashboard', route: 'settings.dashboard' },
+        { title: 'Update Profile', route: 'settings.profile' },
+        { title: 'Designs', route: 'settings.designs' }
+      ]
+    };
+  }
+};
 </script>
 
 <style></style>

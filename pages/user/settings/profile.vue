@@ -54,50 +54,52 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        form: this.$vform({
-          name: '',
-          about: '',
-          tagline: '',
-          formatted_address: '',
-          location: {},
-          available_to_hire: false
-        })
+export default {
+  data() {
+    return {
+      form: this.$vform({
+        name: '',
+        about: '',
+        tagline: '',
+        formatted_address: '',
+        location: {},
+        available_to_hire: false
+      })
+    };
+  },
+  methods: {
+    update() {
+      this.form
+        .put(`/settings/profile`)
+        .then(res => console.log(res))
+        .catch(e => console.log(e));
+    },
+    handleAddress(data) {
+      this.form.formatted_address = data.formatted_address;
+      this.form.location = {
+        latitude: data.latitude,
+        longitude: data.longitude
       };
-    },
-    methods: {
-      update() {
-        this.form
-          .put(`/settings/profile`)
-          .then(res => console.log(res))
-          .catch(e => console.log(e));
-      },
-      handleAddress(data) {
-        this.form.formatted_address = data.formatted_address;
-        this.form.location = {
-          latitude: data.latitude,
-          longitude: data.longitude
-        };
-      }
-    },
-    mounted() {
-      Object.keys(this.form).forEach(k => {
-        if (this.$auth.user.hasOwnProperty(k)) {
-          this.form[k] = this.$auth.user[k];
-        }
-      });
-      if (this.$auth.user.location) {
-        this.form.location = {
-          longitude: this.$auth.user.location.coordinates[0],
-          latitude: this.$auth.user.location.coordinates[1]
-        };
-      } else {
-        this.form.location = {};
-      }
     }
-  };
+  },
+
+  mounted() {
+    Object.keys(this.form).forEach(k => {
+      if (this.$auth.user.hasOwnProperty(k)) {
+        this.form[k] = this.$auth.user[k];
+      }
+    });
+
+    if (this.$auth.user.location) {
+      this.form.location = {
+        longitude: this.$auth.user.location.coordinates[0],
+        latitude: this.$auth.user.location.coordinates[1]
+      };
+    } else {
+      this.form.location = {};
+    }
+  }
+};
 </script>
 
 <style></style>
