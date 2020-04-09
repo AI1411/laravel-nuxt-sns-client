@@ -15,8 +15,9 @@
       <div class="row">
         <div class="col-md-6">
           <div class="card">
-            <div class="card-body p-1" v-if="design.images">
-              <img :src="design.images.large" class="w-100 mb-4" />
+            <div class="card-body p-1">
+              <img src="https://www.gravatar.com/avatar/9c308f28b37069ae60363d256d2ab724jpg?s=200&d=mm" alt="">
+<!--              <img :src="design.images.large" class="w-100 mb-4"/>-->
             </div>
           </div>
         </div>
@@ -33,7 +34,7 @@
                     field="title"
                     v-model="form.title"
                     placeholder="Enter a title"
-                  ></base-input>
+                  />
                 </div>
                 <div class="form-group">
                   <base-textarea
@@ -41,7 +42,7 @@
                     field="description"
                     v-model="form.description"
                     placeholder="Enter a description"
-                  ></base-textarea>
+                  />
                 </div>
                 <div class="form-group">
                   <client-only>
@@ -49,10 +50,10 @@
                       :tags="form.tags"
                       placeholder="Tags separated by commas"
                       on-paste-delimiter=","
-                    ></better-input-tag>
+                    />
                   </client-only>
                 </div>
-                <template v-if="teams.length">
+                <template>
                   <div class="form-group custom-control custom-checkbox">
                     <input
                       type="checkbox"
@@ -102,7 +103,6 @@
                     Publish this design
                   </label>
                 </div>
-
                 <div class="text-right">
                   <base-button :loading="form.busy">
                     Update Design
@@ -120,8 +120,9 @@
 
 <script>
   import BetterInputTag from 'better-vue-input-tag';
+
   export default {
-    middleware: ['auth'],
+    // middleware: ['auth'],
     components: {
       BetterInputTag
     },
@@ -137,18 +138,19 @@
         })
       };
     },
-    async asyncData({ $axios, params, error, redirect }) {
+    async asyncData({$axios, params, error, redirect}) {
       try {
         const design = await $axios.$get(`/designs/${params.id}/byUser`);
         const teams = await $axios.$get(`/users/teams`);
-        return { design: design.data, teams: teams.data };
+        return {design: design.data, teams: teams.data};
       } catch (err) {
-        if (err.response.status === 404) {
-          error({ statusCode: 404, message: 'Design not found' });
-        } else if (err.response.status === 401) {
+        if (err.response === 404) {
+          error({statusCode: 404, message: 'Design not found'});
+        } else if (err.response === 401) {
           redirect('/login');
-        } else {
-          error({ statusCode: 500, message: 'Internal server error' });
+          // } else {
+          //   error({statusCode: 500, message: 'Internal server error'});
+          // }
         }
       }
     },
@@ -158,7 +160,7 @@
           .put(`/designs/${this.$route.params.id}`)
           .then(res => {
             setTimeout(() => {
-              this.$router.push({ name: 'settings.dashboard' });
+              this.$router.push({name: 'settings.dashboard'});
             }, 1000);
           })
           .catch(err => console.log(err.response));
